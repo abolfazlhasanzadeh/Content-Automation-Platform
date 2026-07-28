@@ -15,6 +15,35 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+import localFont from "next/font/local";
+
+
+
+const dana = localFont({
+  src: [
+    {
+      path: "../fonts/Dana-Light.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Dana-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Dana-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Dana-ExtraBold.woff2",
+      weight: "800",
+      style: "normal",
+    },
+  ],
+})
+
 export const metadata: Metadata = {
   title: "Content-automation-platform",
   description: "hello world",
@@ -28,7 +57,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
+      className={cn("h-full", "antialiased",dana.className, geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
