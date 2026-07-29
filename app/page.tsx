@@ -6,7 +6,7 @@ export default function Home() {
     <div className="">
       <SidebarProvider>
 
-        <AppSidebar />
+          <AppSidebar />
 
       </SidebarProvider>
     </div>
