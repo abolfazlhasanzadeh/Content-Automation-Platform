@@ -1,5 +1,7 @@
+'use client'
 import type { LucideIcon } from "lucide-react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -9,36 +11,41 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { fallbackIcon, iconBySlug } from "@/lib/category-icons"
-import { getCategoryCounts } from "@/lib/articles"
-import { cn } from "@/lib/utils"
+import {
+  Atom,
+  Bot,
+  Braces,
+  Cpu,
+  FileCode2,
+  Layout,
+  Database,
+  Users, 
+  Cloud, 
+  GitBranch,
+  Code,
+  Layers,
+  Lock
+} from "lucide-react"
 
 type NavItem = {
-  slug: string
   title: string
   icon: LucideIcon
   badge?: string
-  active?: boolean
   href?: string
 }
 
-function SidebarNavItem({ item }: { item: NavItem }) {
+function SidebarNavItem({ item, pathname }: { item: NavItem; pathname: string }) {
   const Icon = item.icon
+  const isActive = item.href ? pathname === item.href || pathname.startsWith(item.href + "/") : false
   return (
     <SidebarMenuItem>
       <SidebarMenuButton
-        isActive={item.active}
+        isActive={isActive}
         render={item.href ? <Link href={item.href} /> : undefined}
         tooltip={{ side: "left", children: item.title }}
         className="relative"
       >
-        <span
-          aria-hidden
-          className={cn(
-            "absolute top-1/2 start-0 size-1.5 -translate-y-1/2 bg-sidebar-primary opacity-0 transition-opacity duration-200 group-data-[collapsible=icon]:hidden",
-            item.active && "opacity-100"
-          )}
-        />
+
         <Icon />
         <span>{item.title}</span>
         {item.badge && (
@@ -51,46 +58,39 @@ function SidebarNavItem({ item }: { item: NavItem }) {
   )
 }
 
-type ChannelBaseItem = Omit<NavItem, "icon" | "badge">
 
-const channelNav: ChannelBaseItem[] = [
-  { slug: "javascript", title: "جاوااسکریپت", href: "/category/javascript" },
-  { slug: "python", title: "پایتون", href: "/category/python" },
-  { slug: "ai", title: "هوش مصنوعی", href: "/category/ai" },
-  { slug: "react", title: "ری‌اکت", href: "/category/react" },
-  { slug: "rust", title: "راست", href: "/category/rust" },
-  { slug: "frontend", title: "فرانت‌اند", href: "/category/frontend" },
-  { slug: "php", title: "پی‌اچ‌پی", href: "/category/php" },
-  { slug: "laravel", title: "لاراول", href: "/category/laravel" },
-  { slug: "database", title: "پایگاه داده", href: "/category/database" },
-  { slug: "security", title: "امنیت", href: "/category/security" },
-  { slug: "soft-skills", title: "مهارت‌های نرم", href: "/category/soft-skills" },
-  { slug: "devops", title: "دواپس", href: "/category/devops" },
-  { slug: "infrastructure", title: "زیرساخت", href: "/category/infrastructure" },
+
+export const channelNav: NavItem[] = [
+  { title: "جاوااسکریپت", icon: Braces, badge: "۱,۰۲۴", href: "/category/javascript" },
+  { title: "پایتون", icon: FileCode2, badge: "۸۶۰", href: "/category/python" },
+  { title: "هوش مصنوعی", icon: Bot, badge: "۹۴۲", href: "/category/ai" },
+  { title: "ری‌اکت", icon: Atom, badge: "۳۱۱", href: "/category/react" },
+  { title: "راست", icon: Cpu, badge: "۱۲۰", href: "/category/rust" },
+  { title: "فرانت‌اند", icon: Layout, badge: "۴۵۶", href: "/category/frontend" },
+  { title: "پی‌اچ‌پی", icon: Code, badge: "۳۲۹", href: "/category/php" },
+  { title: "لاراول", icon: Layers, badge: "۲۸۴", href: "/category/laravel" },
+  { title: "پایگاه داده", icon: Database, badge: "۱۹۷", href: "/category/database" },
+  { title: "امنیت", icon: Lock, badge: "۱۵۶", href: "/category/security" },
+  { title: "مهارت‌های نرم", icon: Users, badge: "۲۳۴", href: "/category/soft-skills" },
+  { title: "دواپس", icon: Cloud, badge: "۱۸۹", href: "/category/devops" },
+  { title: "زیرساخت", icon: GitBranch, badge: "۱۴۷", href: "/category/infrastructure" },
 ]
 
-export default async function SidebarItem() {
-  const counts = await getCategoryCounts()
-  const countBySlug = new Map(counts.map((c) => [c.categorySlug, c.count]))
-
-  const items = channelNav.map((item) => ({
-    ...item,
-    icon: iconBySlug[item.slug] ?? fallbackIcon,
-    badge: countBySlug.has(item.slug)
-      ? countBySlug.get(item.slug)!.toLocaleString("fa-IR")
-      : undefined,
-  }))
+export default function SidebarItem() {
+  const pathname = usePathname()
 
   return (
-    <SidebarGroup>
-      <SidebarGroupLabel>دسته بندی</SidebarGroupLabel>
-      <SidebarGroupContent>
-        <SidebarMenu>
-          {items.map((item) => (
-            <SidebarNavItem key={item.slug} item={item} />
-          ))}
-        </SidebarMenu>
-      </SidebarGroupContent>
-    </SidebarGroup>
+    <>
+      <SidebarGroup>
+        <SidebarGroupLabel>دسته بندی</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            {channelNav.map((item) => (
+              <SidebarNavItem key={item.title} item={item} pathname={pathname} />
+            ))}
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </>
   )
 }
