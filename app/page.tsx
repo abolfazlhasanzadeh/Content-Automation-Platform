@@ -1,10 +1,11 @@
 import NewsCarousel from "@/components/core/NewsCarousel/NewsCarousel";
 import CategoryNav from "@/components/core/CategoryNav/CategoryNav";
 import { Stagger, Item } from "@/components/core/motion/StaggerGroup";
-import { getAllArticles, categories } from "@/lib/articles";
+import { getAllArticles, getCategoryCounts, categories } from "@/lib/articles";
 
 export default async function Home() {
   const articles = await getAllArticles();
+  const counts = await getCategoryCounts();
 
   return (
     <div className="mx-auto w-full max-w-6xl flex-1 p-4 sm:p-6">
@@ -21,7 +22,7 @@ export default async function Home() {
         </Item>
 
         <Item>
-          <CategoryNav categories={categories} articles={articles} />
+          <CategoryNav categories={categories} counts={counts} />
         </Item>
       </Stagger>
     </div>
