@@ -1,3 +1,4 @@
+import { cache } from "react"
 import { createClient } from "@/lib/supabase/client"
 import type { ContentPost } from "@/types/content-post"
 
@@ -19,6 +20,25 @@ export type Category = {
   title: string
   description: string
 }
+
+export type CategoryCount = {
+  categorySlug: string
+  count: number
+}
+
+export const getCategoryCounts = cache(async (): Promise<CategoryCount[]> => {
+  const supabase = createClient()
+  const { data, error } = await supabase.from("category_counts").select("*")
+
+  if (error) {
+    throw new Error(`getCategoryCounts: ${error.message}`, { cause: error })
+  }
+
+  return (data ?? []).map((row) => ({
+    categorySlug: row.category_slug,
+    count: Number(row.count),
+  }))
+})
 export const categories: Category[] = [
   { slug: "python", title: "پایتون", description: "تازه‌های زبان پایتون، نسخه‌ها و اکوسیستم آن" },
   { slug: "react", title: "ری‌اکت", description: "اخبار ری‌اکت، کامپوننت‌ها و ابزارهای اطرافش" },

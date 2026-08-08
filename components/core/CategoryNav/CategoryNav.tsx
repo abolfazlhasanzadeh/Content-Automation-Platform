@@ -1,48 +1,18 @@
 "use client"
-import type { LucideIcon } from "lucide-react"
 import Link from "next/link"
-import { 
-  Atom, 
-  Bot, 
-  Braces, 
-  Cpu, 
-  FileCode2, 
-  Server,
-  Layout, // for frontend
-  Database, // for laravel/php/database
-  Users, // for soft-skills
-  Cloud, // for infrastructure
-  GitBranch, // for devops
-  Shield, // for security
-  Code, // fallback
-} from "lucide-react"
 import { Stagger, Item } from "@/components/core/motion/StaggerGroup"
-import type { Article, Category } from "@/lib/articles"
-
-const iconBySlug: Record<string, LucideIcon> = {
-  python: FileCode2,
-  react: Atom,
-  javascript: Braces,
-  ai: Bot,
-  rust: Cpu,
-  node: Server,
-  frontend: Layout,
-  laravel: Database,
-  php: Database,
-  "soft-skills": Users,
-  infrastructure: Cloud,
-  devops: GitBranch,
-  database: Database,
-  security: Shield,
-}
+import { fallbackIcon, iconBySlug } from "@/lib/category-icons"
+import type { Category, CategoryCount } from "@/lib/articles"
 
 export default function CategoryNav({
   categories,
-  articles,
+  counts,
 }: {
   categories: Category[]
-  articles: Article[]
+  counts: CategoryCount[]
 }) {
+  const countBySlug = new Map(counts.map((c) => [c.categorySlug, c.count]))
+
   return (
     <section className="mt-12">
       <h2 className="mb-4 flex items-center gap-2 text-lg font-extrabold tracking-tight">
@@ -51,10 +21,8 @@ export default function CategoryNav({
       </h2>
       <Stagger className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6" delay={0.1}>
         {categories.map((category) => {
-          const Icon = iconBySlug[category.slug]
-          const count = articles
-            .filter((a) => a.categorySlug === category.slug)
-            .length.toLocaleString("fa-IR")
+          const Icon = iconBySlug[category.slug] ?? fallbackIcon
+          const count = (countBySlug.get(category.slug) ?? 0).toLocaleString("fa-IR")
           return (
             <Item key={category.slug} hover>
               <Link

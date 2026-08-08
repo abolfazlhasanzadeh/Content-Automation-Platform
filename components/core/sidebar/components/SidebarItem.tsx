@@ -9,29 +9,12 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import {
-  Atom,
-  Bot,
-  Braces,
-  Cpu,
-  FileCode2,
-  History,
-  Inbox,
-  LayoutDashboard,
-  Newspaper,
-
-  Layout, // for frontend
-  Database, // for laravel/php/database
-  Users, // for soft-skills
-  Cloud, // for infrastructure
-  GitBranch,
-  Code,
-  Layers, // for devops
-  Lock
-} from "lucide-react"
+import { fallbackIcon, iconBySlug } from "@/lib/category-icons"
+import { getCategoryCounts } from "@/lib/articles"
 import { cn } from "@/lib/utils"
 
 type NavItem = {
+  slug: string
   title: string
   icon: LucideIcon
   badge?: string
@@ -68,53 +51,46 @@ function SidebarNavItem({ item }: { item: NavItem }) {
   )
 }
 
-const mainNav: NavItem[] = [
-  { title: "داشبورد", icon: LayoutDashboard },
-  { title: "اخبار منتخب", icon: Newspaper, active: true },
-  { title: "پیش‌نویس‌ها", icon: Inbox, badge: "۱۲" },
-  { title: "تاریخچه انتشار", icon: History },
+type ChannelBaseItem = Omit<NavItem, "icon" | "badge">
+
+const channelNav: ChannelBaseItem[] = [
+  { slug: "javascript", title: "جاوااسکریپت", href: "/category/javascript" },
+  { slug: "python", title: "پایتون", href: "/category/python" },
+  { slug: "ai", title: "هوش مصنوعی", href: "/category/ai" },
+  { slug: "react", title: "ری‌اکت", href: "/category/react" },
+  { slug: "rust", title: "راست", href: "/category/rust" },
+  { slug: "frontend", title: "فرانت‌اند", href: "/category/frontend" },
+  { slug: "php", title: "پی‌اچ‌پی", href: "/category/php" },
+  { slug: "laravel", title: "لاراول", href: "/category/laravel" },
+  { slug: "database", title: "پایگاه داده", href: "/category/database" },
+  { slug: "security", title: "امنیت", href: "/category/security" },
+  { slug: "soft-skills", title: "مهارت‌های نرم", href: "/category/soft-skills" },
+  { slug: "devops", title: "دواپس", href: "/category/devops" },
+  { slug: "infrastructure", title: "زیرساخت", href: "/category/infrastructure" },
 ]
 
-export const channelNav: NavItem[] = [
-  { title: "جاوااسکریپت", icon: Braces, badge: "۱,۰۲۴", href: "/category/javascript" },
-  { title: "پایتون", icon: FileCode2, badge: "۸۶۰", href: "/category/python" },
-  { title: "هوش مصنوعی", icon: Bot, badge: "۹۴۲", href: "/category/ai" },
-  { title: "ری‌اکت", icon: Atom, badge: "۳۱۱", href: "/category/react" },
-  { title: "راست", icon: Cpu, badge: "۱۲۰", href: "/category/rust" },
-  { title: "فرانت‌اند", icon: Layout, badge: "۴۵۶", href: "/category/frontend" },
-  { title: "پی‌اچ‌پی", icon: Code, badge: "۳۲۹", href: "/category/php" },
-  { title: "لاراول", icon: Layers, badge: "۲۸۴", href: "/category/laravel" },
-  { title: "پایگاه داده", icon: Database, badge: "۱۹۷", href: "/category/database" },
-  { title: "امنیت", icon: Lock, badge: "۱۵۶", href: "/category/security" },
-  { title: "مهارت‌های نرم", icon: Users, badge: "۲۳۴", href: "/category/soft-skills" },
-  { title: "دواپس", icon: Cloud, badge: "۱۸۹", href: "/category/devops" },
-  { title: "زیرساخت", icon: GitBranch, badge: "۱۴۷", href: "/category/infrastructure" },
-]
+export default async function SidebarItem() {
+  const counts = await getCategoryCounts()
+  const countBySlug = new Map(counts.map((c) => [c.categorySlug, c.count]))
 
-export default function SidebarItem() {
+  const items = channelNav.map((item) => ({
+    ...item,
+    icon: iconBySlug[item.slug] ?? fallbackIcon,
+    badge: countBySlug.has(item.slug)
+      ? countBySlug.get(item.slug)!.toLocaleString("fa-IR")
+      : undefined,
+  }))
+
   return (
-    <>
-      {/* <SidebarGroup>
-        <SidebarGroupLabel>پیشخوان</SidebarGroupLabel>
-        <SidebarGroupContent>
-          <SidebarMenu>
-            {mainNav.map((item) => (
-              <SidebarNavItem key={item.title} item={item} />
-            ))}
-          </SidebarMenu>
-        </SidebarGroupContent>
-      </SidebarGroup> */}
-
-      <SidebarGroup>
-        <SidebarGroupLabel>دسته بندی</SidebarGroupLabel>
-        <SidebarGroupContent>
-          <SidebarMenu>
-            {channelNav.map((item) => (
-              <SidebarNavItem key={item.title} item={item} />
-            ))}
-          </SidebarMenu>
-        </SidebarGroupContent>
-      </SidebarGroup>
-    </>
+    <SidebarGroup>
+      <SidebarGroupLabel>دسته بندی</SidebarGroupLabel>
+      <SidebarGroupContent>
+        <SidebarMenu>
+          {items.map((item) => (
+            <SidebarNavItem key={item.slug} item={item} />
+          ))}
+        </SidebarMenu>
+      </SidebarGroupContent>
+    </SidebarGroup>
   )
 }

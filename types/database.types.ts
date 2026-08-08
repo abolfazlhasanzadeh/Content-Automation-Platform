@@ -60,7 +60,15 @@ export interface Database {
         }
       }
     }
-    Views: Record<string, never>
+    Views: {
+      category_counts: {
+        Row: {
+          category_slug: string
+          count: number
+        }
+        Relationships: []
+      }
+    }
     Functions: Record<string, never>
     Enums: Record<string, never>
   }
