@@ -84,7 +84,6 @@ export async function getAllArticles(): Promise<Article[]> {
   return (data ?? []).map(toArticle)
 }
 
-
   
 export async function getArticle(slug: string): Promise<Article | null> {
   const supabase = createClient()
