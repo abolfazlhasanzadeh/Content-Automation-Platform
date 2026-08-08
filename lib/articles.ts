@@ -19,16 +19,22 @@ export type Category = {
   title: string
   description: string
 }
-
 export const categories: Category[] = [
   { slug: "python", title: "پایتون", description: "تازه‌های زبان پایتون، نسخه‌ها و اکوسیستم آن" },
   { slug: "react", title: "ری‌اکت", description: "اخبار ری‌اکت، کامپوننت‌ها و ابزارهای اطرافش" },
   { slug: "javascript", title: "جاوااسکریپت", description: "موتورها، استانداردها و اخبار جاوااسکریپت" },
-  { slug: "ai", title: "هوش مصنوعی", description: "مدل‌ها، ابزارها و تازه‌های هوش مصنوعی برای توسعه‌کنندگان" },
+  { slug: "ai", title: "هوش مصنوعی", description: "مدل‌ها، ابزارها و تازه‌های هوش مصنوعی برای توسعه‌دهندگان" },
   { slug: "rust", title: "راست", description: "زبان راست و اخبار جامعهٔ آن" },
   { slug: "node", title: "نود.جی‌اس", description: "نود.جی‌اس، سمت سرور و ابزارهای آن" },
+  { slug: "frontend", title: "فرانت‌اند", description: "طراحی رابط کاربری، CSS و ابزارهای فرانت‌اند" },
+  { slug: "laravel", title: "لاراول", description: "فریم‌ورک لاراول، پکیج‌ها و اکوسیستم PHP وب" },
+  { slug: "php", title: "پی‌اچ‌پی", description: "زبان پی‌اچ‌پی، نسخه‌ها و ابزارهای توسعه‌ی وب" },
+  { slug: "soft-skills", title: "مهارت‌های نرم", description: "مدیریت پروژه، رهبری فنی و رشد شغلی توسعه‌دهندگان" },
+  { slug: "infrastructure", title: "زیرساخت", description: "معماری سیستم‌های مقیاس‌پذیر و مهندسی زیرساخت" },
+  { slug: "devops", title: "دواپس", description: "ابزارها و فرهنگ DevOps، CI/CD و اتوماسیون" },
+  { slug: "database", title: "پایگاه داده", description: "پایگاه‌های داده، بهینه‌سازی کوئری و ابزارهای ذخیره‌سازی" },
+  { slug: "security", title: "امنیت", description: "آسیب‌پذیری‌ها، ابزارهای امنیتی و اخبار سایبری" },
 ]
-
 export function getCategory(slug: string) {
   return categories.find((c) => c.slug === slug)
 }
