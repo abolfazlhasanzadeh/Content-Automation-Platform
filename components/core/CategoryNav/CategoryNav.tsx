@@ -1,7 +1,21 @@
 "use client"
 import type { LucideIcon } from "lucide-react"
 import Link from "next/link"
-import { Atom, Bot, Braces, Cpu, FileCode2, Server } from "lucide-react"
+import { 
+  Atom, 
+  Bot, 
+  Braces, 
+  Cpu, 
+  FileCode2, 
+  Server,
+  Layout, // for frontend
+  Database, // for laravel/php/database
+  Users, // for soft-skills
+  Cloud, // for infrastructure
+  GitBranch, // for devops
+  Shield, // for security
+  Code, // fallback
+} from "lucide-react"
 import { Stagger, Item } from "@/components/core/motion/StaggerGroup"
 import type { Article, Category } from "@/lib/articles"
 
@@ -12,6 +26,14 @@ const iconBySlug: Record<string, LucideIcon> = {
   ai: Bot,
   rust: Cpu,
   node: Server,
+  frontend: Layout,
+  laravel: Database,
+  php: Database,
+  "soft-skills": Users,
+  infrastructure: Cloud,
+  devops: GitBranch,
+  database: Database,
+  security: Shield,
 }
 
 export default function CategoryNav({
