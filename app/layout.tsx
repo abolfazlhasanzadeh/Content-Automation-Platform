@@ -2,8 +2,13 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import localFont from "next/font/local";
+import { AppSidebar } from "@/components/core/sidebar/app-sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import SiteHeader from "@/components/core/header/SiteHeader";
+import MotionProvider from "@/components/core/motion/MotionProvider";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,10 +19,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
-import localFont from "next/font/local";
-
-
 
 const dana = localFont({
   src: [
@@ -42,11 +43,11 @@ const dana = localFont({
       style: "normal",
     },
   ],
-})
+});
 
 export const metadata: Metadata = {
-  title: "Content-automation-platform",
-  description: "hello world",
+  title: "اتوماسیون محتوا | اخبار برنامه‌نویسی",
+  description: "پلتفرم تولید و بازبینی خودکار خبرهای برنامه‌نویسی",
 };
 
 export default function RootLayout({
@@ -58,9 +59,27 @@ export default function RootLayout({
     <html
       lang="fa"
       dir="rtl"
-      className={cn("h-full", "antialiased",dana.className, geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
+      className={cn(
+        "antialiased",
+        dana.className,
+        geistSans.variable,
+        geistMono.variable,
+        "font-sans",
+        inter.variable
+      )}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-svh">
+        <MotionProvider>
+        <SidebarProvider>
+          <AppSidebar />
+          <SidebarInset>
+            <SiteHeader />
+            {children}
+          </SidebarInset>
+        </SidebarProvider>
+      
+</MotionProvider>
+      </body>
     </html>
   );
 }

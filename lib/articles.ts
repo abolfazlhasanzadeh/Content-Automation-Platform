@@ -1,0 +1,118 @@
+import { createClient } from "@/lib/supabase/client"
+import type { ContentPost } from "@/types/content-post"
+
+export type Article = {
+  slug: string
+  category: string
+  categorySlug: string
+  title: string
+  excerpt: string
+  source: string
+  time: string
+  status: ContentPost["status"]
+  body: string[]
+  lead?: boolean
+}
+
+export type Category = {
+  slug: string
+  title: string
+  description: string
+}
+
+export const categories: Category[] = [
+  { slug: "python", title: "پایتون", description: "تازه‌های زبان پایتون، نسخه‌ها و اکوسیستم آن" },
+  { slug: "react", title: "ری‌اکت", description: "اخبار ری‌اکت، کامپوننت‌ها و ابزارهای اطرافش" },
+  { slug: "javascript", title: "جاوااسکریپت", description: "موتورها، استانداردها و اخبار جاوااسکریپت" },
+  { slug: "ai", title: "هوش مصنوعی", description: "مدل‌ها، ابزارها و تازه‌های هوش مصنوعی برای توسعه‌کنندگان" },
+  { slug: "rust", title: "راست", description: "زبان راست و اخبار جامعهٔ آن" },
+  { slug: "node", title: "نود.جی‌اس", description: "نود.جی‌اس، سمت سرور و ابزارهای آن" },
+]
+
+export function getCategory(slug: string) {
+  return categories.find((c) => c.slug === slug)
+}
+
+function toArticle(row: ContentPost): Article {
+  return {
+    slug: row.slug,
+    category: row.category,
+    categorySlug: row.category_slug,
+    title: row.title,
+    excerpt: row.excerpt ?? "",
+    source: row.source ?? "",
+    time: row.display_time ?? "",
+    status: row.status,
+    body: row.body ?? [],
+    lead: row.is_lead,
+  }
+}
+
+export async function getAllArticles(): Promise<Article[]> {
+  const supabase = createClient()
+  const { data } = await supabase
+    .from("content_post")
+    .select("*")
+    .order("created_at", { ascending: false })
+
+  return (data ?? []).map(toArticle)
+}
+
+
+
+
+const fakePost = {
+  slug: "fake-post-" + Date.now(),
+  title: "پست آزمایشی: هوش مصنوعی در سال ۲۰۲۶",
+  excerpt: "این یک پست آزمایشی برای تست سیستم است.",
+  body: [
+    "این اولین پاراگراف پست آزمایشی است. هوش مصنوعی در سال ۲۰۲۶ به پیشرفت‌های چشمگیری دست یافته است.",
+    "پاراگراف دوم شامل اطلاعات بیشتر درباره موضوع پست است.",
+  ],
+  category: "هوش مصنوعی",
+  category_slug: "ai",
+  source: "test.com",
+  url: "https://example.com",
+  display_time: "۱۲:۰۰",
+  status: "منتشر شده",
+  is_lead: false,
+}
+
+
+
+  
+export async function getArticle(slug: string): Promise<Article | null> {
+  const supabase = createClient()
+  const { data } = await supabase
+    .from("content_post")
+    .select("*")
+    .eq("slug", slug)
+    .single()
+    
+  return data ? toArticle(data) : null
+}
+
+export async function articlesByCategory(categorySlug: string): Promise<Article[]> {
+  const supabase = createClient()
+  const { data } = await supabase
+    .from("content_post")
+    .select("*")
+    .eq("category_slug", categorySlug)
+    .order("created_at", { ascending: false })
+
+
+
+  return (data ?? []).map(toArticle)
+}
+
+export async function getRelatedArticles(slug: string, limit = 3): Promise<Article[]> {
+  const supabase = createClient()
+  const { data } = await supabase
+    .from("content_post")
+    .select("*")
+    .neq("slug", slug)
+    .order("created_at", { ascending: false })
+    .limit(limit)
+
+  return (data ?? []).map(toArticle)
+}
