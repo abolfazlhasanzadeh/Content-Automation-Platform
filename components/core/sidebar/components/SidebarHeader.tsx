@@ -3,6 +3,7 @@
 import { SidebarHeader as _SidebarHeader, useSidebar } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
 import { ChevronsLeft, ChevronsRight } from "lucide-react"
+import Link from "next/link"
 
 export default function SidebarHeader() {
   const { state, toggleSidebar } = useSidebar()
@@ -11,7 +12,7 @@ export default function SidebarHeader() {
   return (
     <_SidebarHeader className="p-3 group-data-[collapsible=icon]:justify-center">
       <div className="flex items-center justify-between gap-2">
-        <div className="flex min-w-0 items-center gap-2.5 group-data-[collapsible=icon]:hidden">
+        <Link href={"/"} className="flex min-w-0 items-center gap-2.5 group-data-[collapsible=icon]:hidden">
           <span aria-hidden className="size-2.5 shrink-0 bg-sidebar-primary" />
           <div className="min-w-0">
             <p className="truncate text-sm leading-none font-extrabold">اتوماسیون محتوا</p>
@@ -19,7 +20,7 @@ export default function SidebarHeader() {
               اخبار برنامه‌نویسی · خودکار
             </p>
           </div>
-        </div>
+        </Link>
 
         <Button
           variant="ghost"

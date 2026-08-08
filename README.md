@@ -1,103 +1,65 @@
-const sources = {
-  "javascript": [
-    "https://v8.dev/blog.atom",
-    "https://2ality.com/feeds/posts.atom",
-    "https://developer.mozilla.org/en-US/blog/rss.xml",
-    "https://nolanlawson.com/feed.xml",
-    "https://jakearchibald.com/posts.rss",
-    "https://mathiasbynens.be/notes.xml"
-  ],
-  "frontend": [
-    "https://css-tricks.com/feed/",
-    "https://www.smashingmagazine.com/feed/",
-    "https://web.dev/feed.xml",
-    "https://www.joshwcomeau.com/rss.xml",
-    "https://ishadeed.com/feed.xml",
-    "https://piccalil.li/feed.xml",
-    "https://bram.us/feed/"
-  ],
-  "react": [
-    "https://react.dev/rss.xml",
-    "https://overreacted.io/rss.xml",
-    "https://tkdodo.eu/blog/rss.xml",
-    "https://kentcdodds.com/blog/rss.xml",
-    "https://www.robinwieruch.de/rss.xml"
-  ],
-  "laravel": [
-    "https://laravel-news.com/feed",
-    "https://laravel.com/blog/feed",
-    "https://freek.dev/feed",
-    "https://themsaid.com/rss"
-  ],
-  "php": [
-    "https://php.watch/feed.rss",
-    "https://stitcher.io/rss",
-    "https://phpinternals.news/feed"
-  ],
-  "node": [
-    "https://nodejs.org/en/feed/blog.xml",
-    "https://bun.com/blog/rss.xml",
-    "https://deno.com/blog/feed.xml",
-    "https://nodesource.com/blog/feed"
-  ],
-  "soft-skills": [
-    "https://martinfowler.com/feed.atom",
-    "https://newsletter.pragmaticengineer.com/feed",
-    "https://lethain.com/index.xml",
-    "https://www.geoffreylitt.com/feed.xml"
-  ],
-  "python": [
-    "https://realpython.com/atom.xml",
-    "https://blog.python.org/feeds/posts/default",
-    "https://treyhunner.com/blog/feed/",
-    "https://pythonspeed.com/atom.xml"
-  ],
-  "infrastructure": [
-    "https://netflixtechblog.com/feed",
-    "https://engineering.fb.com/feed/",
-    "https://blog.cloudflare.com/rss/",
-    "https://aws.amazon.com/blogs/architecture/feed/",
-    "https://brooker.co.za/blog/feed.xml"
-  ],
-  "devops": [
-    "https://www.hashicorp.com/blog/feed.xml",
-    "https://charity.wtf/rss",
-    "https://www.datadoghq.com/blog/feed/"
-  ],
-  "database": [
-    "https://www.percona.com/blog/feed/",
-    "https://planetscale.com/blog/rss.xml",
-    "https://www.cockroachlabs.com/blog/feed/"
-  ],
-  "security": [
-    "https://krebsonsecurity.com/feed/",
-    "https://feeds.feedburner.com/TheHackersNews",
-    "https://www.bleepingcomputer.com/feed/",
-    "https://googleprojectzero.blogspot.com/feeds/posts/default",
-    "https://www.troyhunt.com/rss/",
-    "https://blog.yossarian.net/rss.xml"
-  ],
-  "ai": [
-    "https://www.anthropic.com/news/rss.xml",
-    "https://openai.com/blog/rss.xml",
-    "https://deepmind.google/blog/rss.xml",
-    "https://pytorch.org/blog/feed.xml",
-    "https://simonwillison.net/atom/everything/",
-    "https://www.interconnects.ai/feed",
-    "https://www.philschmid.de/rss"
-  ],
-  "rust": [
-    "https://blog.rust-lang.org/feed.xml",
-    "https://this-week-in-rust.org/rss.xml",
-    "https://fasterthanli.me/index.xml",
-    "https://matklad.github.io/feed.xml"
-  ]
-};
+# اخبار و مقالات برنامه‌نویسی
 
-const items = [];
-for (const [category, urls] of Object.entries(sources)) {
-  for (const url of urls) {
-    items.push({ json: { url, category_hint: category } });
-  }
-}
-return items;
+یک پلتفرم فارسی برای دنبال کردن اخبار، مقالات و مطالب کاربردی دنیای برنامه‌نویسی و فناوری.
+
+هدف این پروژه این است که دنبال کردن اتفاقات و مطالب مهم دنیای نرم‌افزار را برای توسعه‌دهندگان فارسی‌زبان ساده‌تر کند؛ بدون اینکه لازم باشد هر روز ده‌ها وب‌سایت و وبلاگ مختلف را بررسی کنند.
+
+## 📰 چه مطالبی منتشر می‌شود؟
+
+محتوا در حوزه‌های مختلف دنیای نرم‌افزار و فناوری منتشر می‌شود، از جمله:
+
+* جاوااسکریپت
+* ری‌اکت
+* فرانت‌اند
+* نود.جی‌اس
+* پایتون
+* PHP
+* لاراول
+* راست
+* هوش مصنوعی
+* دواپس
+* زیرساخت
+* پایگاه داده
+* امنیت
+* مهارت‌های نرم
+
+## 🎯 هدف پروژه
+
+هر روز تعداد زیادی خبر و مقاله در دنیای برنامه‌نویسی منتشر می‌شود، اما همه آن‌ها ارزش خواندن ندارند.
+
+این پروژه تلاش می‌کند مطالب مفید و مهم را از میان منابع مختلف پیدا کند و آن‌ها را به شکلی روان و قابل‌فهم در اختیار مخاطب فارسی‌زبان قرار دهد.
+
+تمرکز اصلی روی **کیفیت محتوا، اهمیت موضوع و کاربردی بودن مطالب** است، نه صرفاً انتشار تعداد زیادی مطلب.
+
+## 🌍 منابع
+
+مطالب از میان مجموعه‌ای از منابع معتبر و تخصصی دنیای فناوری انتخاب می‌شوند؛ از وبلاگ‌های رسمی شرکت‌ها و پروژه‌ها گرفته تا مهندسان نرم‌افزار، پژوهشگران و نویسندگان شناخته‌شده حوزه فناوری.
+
+موضوعات و منابع به‌مرور زمان گسترش پیدا می‌کنند تا حوزه‌های بیشتری از دنیای نرم‌افزار پوشش داده شوند.
+
+## 🤖 استفاده از هوش مصنوعی
+
+در فرایند آماده‌سازی مطالب از هوش مصنوعی کمک گرفته می‌شود.
+
+هدف، ترجمه تحت‌اللفظی مطالب نیست؛ بلکه تلاش می‌شود محتوای اصلی با حفظ مفهوم و جزئیات مهم، به متنی روان و طبیعی برای مخاطب فارسی‌زبان تبدیل شود.
+
+اصطلاحات تخصصی نیز تا حد امکان به همان شکلی استفاده می‌شوند که در میان برنامه‌نویسان رایج هستند.
+
+## 👨‍💻 برای چه کسانی؟
+
+این پروژه برای افرادی ساخته شده که به دنیای برنامه‌نویسی و فناوری علاقه دارند؛ از جمله:
+
+* برنامه‌نویسان
+* توسعه‌دهندگان وب
+* مهندسان نرم‌افزار
+* دانشجویان
+* علاقه‌مندان به فناوری
+* افرادی که در حال یادگیری برنامه‌نویسی هستند
+
+## 🚀 چشم‌انداز
+
+دنیای فناوری با سرعت زیادی تغییر می‌کند.
+
+هدف این پروژه این است که دنبال کردن این تغییرات برای توسعه‌دهندگان فارسی‌زبان ساده‌تر شود و دسترسی به مطالب ارزشمند و به‌روز، بدون جست‌وجوی مداوم در منابع مختلف، امکان‌پذیر باشد.
+
+**مطالب مهم‌تر، در یک جا.**
