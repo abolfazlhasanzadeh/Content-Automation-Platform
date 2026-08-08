@@ -1,6 +1,5 @@
 import NewsCarousel from "@/components/core/NewsCarousel/NewsCarousel";
 import CategoryNav from "@/components/core/CategoryNav/CategoryNav";
-import StatsStrip from "@/components/core/StatsStrip/StatsStrip";
 import { Stagger, Item } from "@/components/core/motion/StaggerGroup";
 import { getAllArticles, categories } from "@/lib/articles";
 
@@ -10,9 +9,6 @@ export default async function Home() {
   return (
     <div className="mx-auto w-full max-w-6xl flex-1 p-4 sm:p-6">
       <Stagger>
-        <Item>
-          <StatsStrip articles={articles} categories={categories} />
-        </Item>
 
         <Item>
           <section className="mt-10">

@@ -19,7 +19,15 @@ import {
   Inbox,
   LayoutDashboard,
   Newspaper,
-  Server,
+
+  Layout, // for frontend
+  Database, // for laravel/php/database
+  Users, // for soft-skills
+  Cloud, // for infrastructure
+  GitBranch,
+  Code,
+  Layers, // for devops
+  Lock
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -67,19 +75,26 @@ const mainNav: NavItem[] = [
   { title: "تاریخچه انتشار", icon: History },
 ]
 
-const channelNav: NavItem[] = [
+export const channelNav: NavItem[] = [
   { title: "جاوااسکریپت", icon: Braces, badge: "۱,۰۲۴", href: "/category/javascript" },
   { title: "پایتون", icon: FileCode2, badge: "۸۶۰", href: "/category/python" },
   { title: "هوش مصنوعی", icon: Bot, badge: "۹۴۲", href: "/category/ai" },
   { title: "ری‌اکت", icon: Atom, badge: "۳۱۱", href: "/category/react" },
   { title: "راست", icon: Cpu, badge: "۱۲۰", href: "/category/rust" },
-  { title: "نود.جی‌اس", icon: Server, badge: "۲۱۸", href: "/category/node" },
+  { title: "فرانت‌اند", icon: Layout, badge: "۴۵۶", href: "/category/frontend" },
+  { title: "پی‌اچ‌پی", icon: Code, badge: "۳۲۹", href: "/category/php" },
+  { title: "لاراول", icon: Layers, badge: "۲۸۴", href: "/category/laravel" },
+  { title: "پایگاه داده", icon: Database, badge: "۱۹۷", href: "/category/database" },
+  { title: "امنیت", icon: Lock, badge: "۱۵۶", href: "/category/security" },
+  { title: "مهارت‌های نرم", icon: Users, badge: "۲۳۴", href: "/category/soft-skills" },
+  { title: "دواپس", icon: Cloud, badge: "۱۸۹", href: "/category/devops" },
+  { title: "زیرساخت", icon: GitBranch, badge: "۱۴۷", href: "/category/infrastructure" },
 ]
 
 export default function SidebarItem() {
   return (
     <>
-      <SidebarGroup>
+      {/* <SidebarGroup>
         <SidebarGroupLabel>پیشخوان</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
@@ -88,7 +103,7 @@ export default function SidebarItem() {
             ))}
           </SidebarMenu>
         </SidebarGroupContent>
-      </SidebarGroup>
+      </SidebarGroup> */}
 
       <SidebarGroup>
         <SidebarGroupLabel>دسته بندی</SidebarGroupLabel>
