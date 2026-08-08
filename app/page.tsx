@@ -3,6 +3,8 @@ import CategoryNav from "@/components/core/CategoryNav/CategoryNav";
 import { Stagger, Item } from "@/components/core/motion/StaggerGroup";
 import { getAllArticles, getCategoryCounts, categories } from "@/lib/articles";
 
+export const revalidate = 60 * 60; // 1 hour (in seconds)
+
 export default async function Home() {
   const articles = await getAllArticles();
   const counts = await getCategoryCounts();
