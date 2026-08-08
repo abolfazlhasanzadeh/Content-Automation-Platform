@@ -57,18 +57,7 @@ export default function ContentPageClient({
           <span aria-hidden className="size-1.5 rounded-[1px] bg-primary" />
           {article.category}
         </Link>
-        <span
-          className={cn(
-            "inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[11px] leading-none font-bold",
-            article.status === "فوری"
-              ? "border-primary bg-primary text-primary-foreground"
-              : article.status === "در انتظار تأیید"
-                ? "border-primary/40 bg-primary/5 text-primary"
-                : "border-border text-muted-foreground"
-          )}
-        >
-          {article.status}
-        </span>
+
       </motion.div>
 
       <motion.h1
@@ -102,7 +91,6 @@ export default function ContentPageClient({
         <span className="opacity-40">/</span>
         <span>بازبینی انسانی</span>
         <span aria-hidden className="hidden opacity-40 sm:block sm:ms-auto">
-          —
         </span>
         <time>{article.time}</time>
         <span className="opacity-40">·</span>
@@ -140,7 +128,6 @@ export default function ContentPageClient({
                 excerpt={item.excerpt}
                 source={item.source}
                 time={item.time}
-                status={item.status}
                 href={`/content/${item.slug}`}
                 className="min-h-64"
               />

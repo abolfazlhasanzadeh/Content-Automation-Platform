@@ -31,7 +31,6 @@ export default function NewsCarousel({ articles }: { articles: Article[] }) {
               excerpt={article.excerpt}
               source={article.source}
               time={article.time}
-              status={article.status}
               href={`/content/${article.slug}`}
             />
           </div>

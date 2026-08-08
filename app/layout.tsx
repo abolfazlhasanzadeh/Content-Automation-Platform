@@ -70,15 +70,14 @@ export default function RootLayout({
     >
       <body className="min-h-svh">
         <MotionProvider>
-        <SidebarProvider>
-          <AppSidebar />
-          <SidebarInset>
-            <SiteHeader />
-            {children}
-          </SidebarInset>
-        </SidebarProvider>
-      
-</MotionProvider>
+          <SidebarProvider>
+            <AppSidebar />
+            <SidebarInset>
+              {/* <SiteHeader /> */}
+              {children}
+            </SidebarInset>
+          </SidebarProvider>
+        </MotionProvider>
       </body>
     </html>
   );

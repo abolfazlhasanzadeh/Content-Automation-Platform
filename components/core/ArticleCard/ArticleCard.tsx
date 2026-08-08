@@ -50,13 +50,14 @@ export default function ArticleCard({
   excerpt,
   source,
   time,
-  status = "منتشر شده",
   href,
   className,
 }: ArticleCardProps) {
   const isLead = variant === "lead"
 
   return (
+    <Link
+    href={href!} >
     <article
       aria-label={title}
       className={cn(
@@ -84,8 +85,6 @@ export default function ArticleCard({
           )}
         >
           <time>{time}</time>
-          <span aria-hidden className="opacity-40">·</span>
-          <span className="truncate font-mono">{source}</span>
         </div>
       </header>
 
@@ -114,10 +113,9 @@ export default function ArticleCard({
       )}
 
       <footer className="mt-auto flex items-center justify-between gap-3 pt-5">
-        <StatusPill status={status} />
-        {href && (
-          <Link
-            href={href}
+        <span className="truncate font-mono text-[11px]">{source}</span>
+
+          <span
             className={cn(
               "inline-flex items-center gap-1.5 font-extrabold text-[11px] transition-colors",
               isLead
@@ -127,9 +125,10 @@ export default function ArticleCard({
           >
             مطالعهٔ کامل
             <ArrowLeft className="size-3" />
-          </Link>
-        )}
+          </span>
+        
       </footer>
     </article>
+    </Link>
   )
 }

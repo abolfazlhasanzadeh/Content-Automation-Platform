@@ -70,7 +70,6 @@ export default function CategoryContent({ category, count, items }: ICategory) {
               excerpt={item.excerpt}
               source={item.source}
               time={item.time}
-              status={item.status}
               href={`/content/${item.slug}`}
               className="min-h-64"
             />
