@@ -5,6 +5,8 @@ import CategoryContent from "./CategoryContent"
 
 type Params = { slug: string }
 
+export const revalidate = 1800
+
 export async function generateStaticParams() {
   return categories.map((c) => ({ slug: c.slug }))
 }
