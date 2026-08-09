@@ -3,7 +3,6 @@ import { ArrowLeft } from "lucide-react";
 import Masthead from "@/components/core/header/Masthead";
 import ArticleCard from "@/components/core/ArticleCard/ArticleCard";
 import CategoryNav from "@/components/core/CategoryNav/CategoryNav";
-import PipelineStrip from "@/components/feature/PipelineStrip/PipelineStrip";
 import { Stagger, Item } from "@/components/core/motion/StaggerGroup";
 import { getAllArticles, getCategoryCounts, categories } from "@/lib/articles";
 
@@ -33,10 +32,6 @@ export default async function Home() {
       <Stagger>
         <Item>
           <Masthead date={today} total={faCount(articles.length)} />
-        </Item>
-
-        <Item>
-          <PipelineStrip sourceCount={String(uniqueSources)} />
         </Item>
 
         {lead && (
