@@ -4,13 +4,11 @@ import { SidebarTrigger } from "@/components/ui/sidebar"
 
 export default function Masthead({
   date,
-  total,
 }: {
   date: string
-  total: string
 }) {
   return (
-    <header className="flex items-center justify-between gap-3 border-b border-border pb-4">
+    <header className="flex items-center justify-between gap-3 border-b border-border p-[18.5px]">
       <div className="flex min-w-0 items-center gap-2.5">
         <SidebarTrigger
           className="md:hidden"
@@ -26,10 +24,7 @@ export default function Masthead({
       </div>
       <p className="flex shrink-0 items-center gap-x-2.5 text-xs text-muted-foreground">
         <time className="hidden tabular-nums sm:inline">{date}</time>
-        <span aria-hidden className="hidden sm:inline">
-          · 
-        </span>
-        <span className="tabular-nums">{total} مطلب</span>
+
       </p>
     </header>
   )

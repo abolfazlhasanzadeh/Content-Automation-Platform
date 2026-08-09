@@ -19,10 +19,7 @@ export default function SidebarFooter() {
                   <User2 className="size-4" />
                 </span>
                 <div className="flex min-w-0 flex-1 flex-col items-start text-start group-data-[collapsible=icon]:hidden">
-                  <span className="text-sm font-medium">مهمان</span>
-                  <span className="truncate text-xs text-sidebar-foreground/60">
-                    وارد نشده
-                  </span>
+                  <span className="text-sm font-medium">پوسته</span>
                 </div>
               </div>
             }

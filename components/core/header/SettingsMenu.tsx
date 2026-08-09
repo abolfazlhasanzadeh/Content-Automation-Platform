@@ -111,7 +111,7 @@ export default function SettingsMenu({
               <span className="size-4 rounded-full bg-background shadow-sm" />
             </button>
           </div>
-
+{/* 
           <div className="mx-2 my-2 h-px bg-border" />
 
           <p className="px-2 pb-1 pt-2 text-[11px] font-bold text-muted-foreground">
@@ -142,7 +142,7 @@ export default function SettingsMenu({
 
           <p className="px-2 pb-1 pt-2 font-mono text-[11px] tabular-nums text-muted-foreground">
             نسخهٔ ۰.۱.۰
-          </p>
+          </p> */}
         </div>
       )}
     </div>

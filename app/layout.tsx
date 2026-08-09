@@ -5,8 +5,9 @@ import { cn } from "@/lib/utils";
 import localFont from "next/font/local";
 import { AppSidebar } from "@/components/core/sidebar/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import SiteHeader from "@/components/core/header/SiteHeader";
 import MotionProvider from "@/components/core/motion/MotionProvider";
+import { Item } from "@/components/core/motion/StaggerGroup";
+import Masthead from "@/components/core/header/Masthead";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -50,11 +51,22 @@ export const metadata: Metadata = {
   description: "پلتفرم تولید و بازبینی خودکار خبرهای برنامه‌نویسی",
 };
 
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
+
+  const today = new Intl.DateTimeFormat("fa-IR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(new Date());
+  
   return (
     <html
       lang="fa"
@@ -73,7 +85,9 @@ export default function RootLayout({
           <SidebarProvider>
             <AppSidebar />
             <SidebarInset>
-              {/* <SiteHeader /> */}
+              <Item>
+                <Masthead date={today} />
+              </Item>
               {children}
             </SidebarInset>
           </SidebarProvider>

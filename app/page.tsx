@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import Masthead from "@/components/core/header/Masthead";
 import ArticleCard from "@/components/core/ArticleCard/ArticleCard";
 import CategoryNav from "@/components/core/CategoryNav/CategoryNav";
 import { Stagger, Item } from "@/components/core/motion/StaggerGroup";
@@ -18,21 +17,10 @@ export default async function Home() {
   const feed = lead
     ? articles.filter((a) => a.slug !== lead.slug).slice(0, 9)
     : articles.slice(0, 9);
-  const uniqueSources = new Set(
-    articles.map((a) => a.source?.trim()).filter(Boolean)
-  ).size;
-  const today = new Intl.DateTimeFormat("fa-IR", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(new Date());
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-6 sm:px-6 sm:py-8">
       <Stagger>
-        <Item>
-          <Masthead date={today} total={faCount(articles.length)} />
-        </Item>
 
         {lead && (
           <Item>
